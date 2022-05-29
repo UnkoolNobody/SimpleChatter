@@ -3,9 +3,26 @@
 #include <random>
 using namespace std;
 
+int conversation();
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    int lenghth, reply;
+    char conver[255];
+    cout << R"~(Так о чём ты там поболтать хотел? Я собеседник довольно интересный, разговор поддержать могу. Только покороче пиши, ок?)~"<<endl;
+    while (true) {
+        cout << ">";
+        cin.getline(conver, 128);
+        lenghth = strlen(conver);
+        random_device rand;
+        reply = conversation();
+    }
+}
+
 int conversation() {
     int conv;
-    conv = 1 + rand() % 20;
+    conv = 1 + rand() % 23;
     switch (conv)
     {
     case 1: { cout << "Хех, мда.\n"; break; }
@@ -28,21 +45,9 @@ int conversation() {
     case 18: { cout << "Тоже мне.\n"; break; }
     case 19: { cout << "Ага, да.\n"; break; }
     case 20: { cout << "Воу. Я правда удивлен. Типо.\n"; break; }
+    case 21: { cout << "Ну и ну.\n"; break; }
+    case 22: { cout << "Ты знаешь как писать?\n"; break; }
+    case 23: { cout << "Воу. Я правда удивлен. Нет, серьёзно.\n"; break; }
     }
     return conv;
-}
-
-int main()
-{
-    setlocale(LC_ALL, "rus");
-    int lenghth, reply;
-    char conver[255];
-    cout << R"~(Так о чём ты там поболтать хотел? Я собеседник довольно интересный, разговор поддержать могу. Только покороче пиши, ок?)~"<<endl;
-    while (true) {
-        cout << ">";
-        cin.getline(conver, 128);
-        lenghth = strlen(conver);
-        random_device rand;
-        reply = conversation();
-    }
 }
