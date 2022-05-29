@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-const int n = 5;
+const int n = 4;
 
 int Rand() {
            int a = rand() % 2;
@@ -49,25 +49,9 @@ int main()
         sto--;
         if (str >= 0 && str < n && sto >= 0 && sto < n) {
             if (a[str][sto] == 1) {
-                for (int i = 0; i < n; i++) {
-                    if (a[i][sto] == 1) a[i][sto] = 0;
-                    else if (a[i][sto] == 0) a[i][sto] = 1;
-                }
-                for (int i = 0; i < n; i++) {
-                    if (a[str][i] == 1) a[str][i] = 0;
-                    else if (a[str][i] == 0) a[str][i] = 1;
-                }
                 a[str][sto] = 0;
             }
-            else if (a[str][sto] == 0) {
-                for (int i = 0; i < n; i++) {
-                    if (a[i][sto] == 0) a[i][sto] = 1;
-                    else if (a[i][sto] == 1) a[i][sto] = 0;
-                }
-                for (int i = 0; i < n; i++) {
-                    if (a[str][i] == 0) a[str][i] = 1;
-                    else if (a[str][i] == 1) a[str][i] = 0;
-                }
+            else {
                 a[str][sto] = 1;
             }
             cout << "Изменённая матрица: \n";
