@@ -15,7 +15,7 @@ int main()
         cout << ">";
         cin.getline(conver, 220);
         random_device rand;
-        reply = conversation();
+        otvet = conversation();
     }
 }
 
