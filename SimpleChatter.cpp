@@ -8,26 +8,25 @@ int conversation();
 int main()
 {
     setlocale(LC_ALL, "rus");
-    int lenghth, reply;
+    int otvet;
     char conver[255];
     cout << R"~(Так о чём ты там поболтать хотел? Я собеседник довольно интересный, разговор поддержать могу. Только покороче пиши, ок?)~"<<endl;
     while (true) {
         cout << ">";
-        cin.getline(conver, 128);
-        lenghth = strlen(conver);
+        cin.getline(conver, 250);
         random_device rand;
-        reply = conversation();
+        otvet = conversation();
     }
 }
 
 int conversation() {
     int conv;
-    conv = 1 + rand() % 23;
+    conv = 1 + rand() % 25;
     switch (conv)
     {
     case 1: { cout << "Хех, мда.\n"; break; }
     case 2: { cout << "Ясно.\n"; break; }
-    case 3: { cout << "Зато ты похож на жопу!\n"; break; }
+    case 3: { cout << "Плох!\n"; break; }
     case 4: { cout << "Ок.\n"; break; }
     case 5: { cout << "Мммм...\n"; break; }
     case 6: { cout << ")\n"; break; }
@@ -48,6 +47,8 @@ int conversation() {
     case 21: { cout << "Ну и ну.\n"; break; }
     case 22: { cout << "Ты знаешь как писать?\n"; break; }
     case 23: { cout << "Воу. Я правда удивлен. Нет, серьёзно.\n"; break; }
+    case 24: { cout << "Meh.\n"; break; }
+    case 25: { cout << "Nah.\n"; break; }
     }
     return conv;
 }
