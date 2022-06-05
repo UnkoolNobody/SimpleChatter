@@ -1,28 +1,59 @@
-﻿// Интересный собеседник: программа, которая НИКОГДА не поддержит ваш разговор.
+﻿/**
+@file SimpleChatter.cpp
+*/
+
 #include <iostream>
 #include <random>
 using namespace std;
 
-int conversation();
+/**
+*    \author UnkoolNobody
+*    \version 1.0
+*    \date 29 Май 2022 года
+ */
 
-int main()
+ /**
+* \file
+* \brief Интересный собеседник
+*
+ *Данный файл содержит в себе исходный код программы, симулирующего собеседника, "заинтересованного" в разговоре.
+ */
+
+void conversation(); /// \brief Прототип вызываемой позже функции.
+
+int main() /// \brief Главная функция.
 {
     setlocale(LC_ALL, "rus");
-    int reply;
-    char conver[255];
+    int reply = 0;
+    char conver[255]; /// \brief Поле ввода слов.
     cout << R"~(Так о чём ты там поболтать хотел? Я собеседник довольно интересный, разговор поддержать могу. Только покороче пиши, ок?)~"<<endl;
-    while (true) {
+    while (true) { /// \brief Условие окончание цикла. Стоит на бесконечное положительное условие.
         cout << ">";
-        cin.getline(conver, 220);
-        random_device rand;
-        otvet = conversation();
+        cin.getline(conver, 220); /// \brief Вводится строка длиной 220 символов.
+        random_device rand; /// \brief Функция задаёт рандомную генерацию числа.
+        conversation(reply); /// \brief Вызов функции с рандомизацией.
     }
 }
 
-int conversation() {
-    int conv;
-    conv = 1 + rand() % 25;
-    switch (conv)
+/*!
+*функция возвращает случайно взятую из case перерменную
+*\param reply порядковый номер присваиваемый функции case
+*\return одну из 25 возможных переменных для передачи в главную функцию.
+*/
+void conversation(int reply) {
+    /*!
+   *  \brief Функция рандомизации
+    * 
+    * Данная функция возвращает случайное число из диапазона от 1 до 25.
+   *  Для выполнения нужна библиотека #include <random>.
+   *
+   * Код функции выглядит следующим образом:
+   *  \code
+   *  reply = 1 + rand() % 25;
+   *  \endcode
+*/
+    reply = 1 + rand() % 25;
+    switch (reply) /// \brief функция возвращает один из 25 вариантов ответа по переменной.
     {
     case 1: { cout << "Хех, мда.\n"; break; }
     case 2: { cout << "Ясно.\n"; break; }
@@ -49,6 +80,5 @@ int conversation() {
     case 23: { cout << "Воу. Я правда удивлен. Нет, серьёзно.\n"; break; }
     case 24: { cout << "Meh.\n"; break; }
     case 25: { cout << "Nah.\n"; break; }
-    }
-    return conv;
+    };
 }
