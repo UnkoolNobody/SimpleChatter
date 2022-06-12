@@ -1,27 +1,24 @@
-name: C/C++ CI
+name: "File existence check"
 
-on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches: 
-    - main
+on: [push, pull_request]
 
 jobs:
-  build:
-
+  file_existence:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
-      
-      
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "test_git.txt"
+
+      - name: File not exist
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: echo File does not exist!
+        
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo File exists, ready for !
