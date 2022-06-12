@@ -16,8 +16,12 @@ jobs:
           files: "test_git.txt"
 
       - name: File not exist
-        if: steps.check_files.outputs.files_exists == 'false'
-        run: echo File does not exist!
+         run: |
+          if: steps.check_files.outputs.files_exists == 'false'
+         run: echo File does not exist!
+          stopMarker=$(uuidgen)
+          echo "::stop-commands::$stopMarker"
+          echo "::$stopMarker::"
         
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'true'
