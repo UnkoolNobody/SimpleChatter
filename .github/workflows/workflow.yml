@@ -1,4 +1,4 @@
-name: "File existence check"
+name: "WORKFLOW.YML"
 
 on: [push, pull_request]
 
@@ -41,7 +41,7 @@ jobs:
       - name: Push to IO repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          DOCUMENTATION: ${{ secrets.DOCUMENTATION }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: './doc'
           destination-github-username: 'UnkoolNobody'
