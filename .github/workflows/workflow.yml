@@ -29,7 +29,7 @@ jobs:
         
       - uses: actions/checkout@v2 
       - name: DoxygenDocumentationCreate
-        uses: mattnotmitt/doxygen-action@v1.9.3
+        uses: mattnotmitt/doxygen-action@v1.9.2
         with:
           doxyfile-path: './Doxyfile'
       - name: upload result
