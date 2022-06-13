@@ -38,7 +38,7 @@ jobs:
           path: doc
           name: Doxygen
       - name: Push to IO repository
-        uses: cpina/github-action-rush-to-another-repository@main
+        uses: cpina/github-action-rush-to-another-repositiry@main
         env:
           KEY: ${{ secrets.KEY }}
         with:
