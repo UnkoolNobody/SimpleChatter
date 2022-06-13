@@ -46,6 +46,6 @@ jobs:
           source-directory: './doc'
           destination-github-username: 'UnkoolNobody'
           destination-repository-name: 'SimpleChatter.io'
-          user-email: michaelzh2002@mail.ru
+          user-email: 'michaelzh2002@mail.ru'
           commit-message: 'Doxygen-documentation'
           target-branch: main
