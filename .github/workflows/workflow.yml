@@ -41,11 +41,11 @@ jobs:
       - name: Push to IO repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          KEY: ${{ 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 }}
+          API_TOKEN_GITHUB: ${{ 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 }}
         with:
           source-directory: 'doc'
           destination-github-username: 'UnkoolNobody'
           destination-repository-name: 'SimpleChatter.io'
-          user-email: 'michaelzh2002@mail.ru'
+          user-email: michaelzh2002@mail.ru
           commit-massage: 'Doxygen-documentation'
           target-branch: main
