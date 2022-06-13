@@ -41,7 +41,7 @@ jobs:
       - name: Push to IO repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          API_TOKEN_GITHUB: ${{ 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 }}
+          Documentation: ${{ secrets.Documentation }}
         with:
           source-directory: 'doc'
           destination-github-username: 'UnkoolNobody'
