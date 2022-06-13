@@ -43,7 +43,7 @@ jobs:
         env:
           DOCUMENTATION: ${{ secrets.DOCUMENTATION }}
         with:
-          source-directory: 'doc'
+          source-directory: './doc'
           destination-github-username: 'UnkoolNobody'
           destination-repository-name: 'SimpleChatter.io'
           user-email: michaelzh2002@mail.ru
