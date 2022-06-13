@@ -41,7 +41,7 @@ jobs:
       - name: Push to IO repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          Documentation: ${{ secrets.Documentation }}
+          DOCUMENTATION: ${{ secrets.DOCUMENTATION }}
         with:
           source-directory: 'doc'
           destination-github-username: 'UnkoolNobody'
