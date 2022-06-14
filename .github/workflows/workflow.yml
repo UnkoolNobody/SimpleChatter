@@ -13,7 +13,27 @@ jobs:
           - os: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+
+      - name: Build for Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.so
+
+      - name: Build for Windows
+        if: matrix.os == 'windows-latest'
+        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.dll
+
+      - name: Build for macOS
+        if: matrix.os == 'macos-latest'
+        run: g++ -fno-common -dynamiclib src/stats.c -o dist/sqlite3-stats.dylib
+        
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
 
       - name: Check file existence
         id: check_files
@@ -32,8 +52,7 @@ jobs:
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: echo File exists, ready for !
-        
-      - uses: actions/checkout@v2 
+
       - name: DoxygenDocumentationCreate
         uses: mattnotmitt/doxygen-action@edge
         with:
@@ -57,21 +76,3 @@ jobs:
           user-email: 'michaelzh2002@mail.ru'
           commit-message: 'Doxygen-documentation'
           target-branch: main
-
-      - name: Build for Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.so
-
-      - name: Build for Windows
-        if: matrix.os == 'windows-latest'
-        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.dll
-
-      - name: Build for macOS
-        if: matrix.os == 'macos-latest'
-        run: g++ -fno-common -dynamiclib src/stats.c -o dist/sqlite3-stats.dylib
-        
-      - name: upload prog
-        uses: actions/upload-artifact@v3
-        with:
-          path: prog
-          name: Compiled Program
