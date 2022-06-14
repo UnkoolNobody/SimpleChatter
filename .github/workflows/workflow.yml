@@ -58,8 +58,6 @@ jobs:
           commit-message: 'Doxygen-documentation'
           target-branch: main
 
-      - uses: actions/checkout@v2
-
       - name: Build for Linux
         if: matrix.os == 'ubuntu-latest'
         run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.so
