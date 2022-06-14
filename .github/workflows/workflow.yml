@@ -29,8 +29,7 @@ jobs:
         uses: JasonEtco/upload-to-release@v0.1.1 
         env: 
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }} 
-        with: |
-          args: prog/AnotherFunc.exe application/octet-stream
+        with: 
           args: prog/SimpleChatter.exe application/octet-stream
 
       - name: Check file existence
