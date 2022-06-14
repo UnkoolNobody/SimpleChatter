@@ -4,13 +4,12 @@ on: [push, pull_request]
 
 jobs:
   file_existence:
-    runs-on:  windows-latest
+    runs-on:  ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         
       - name: Build for Windows
-        if: matrix.os == 'windows-latest'
         run: |
           g++ AnotherFunc.cpp -o AnotherFunc.exe
           g++ SimpleChatter.cpp -o SimpleChatter.exe
