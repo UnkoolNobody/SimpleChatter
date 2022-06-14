@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   compile_and_document_if_file_exists:
-    runs-on:  ubuntu-latest
+    runs-on:  windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -13,12 +13,19 @@ jobs:
         run: |
           sudo apt-get install g++-10
           g++ SimpleChatter.cpp -o SimpleChatter.exe
+          g++ AnotherFunc.cpp -o AnotherFunc.exe
           ls
       - name: upload SimpleChatter
         uses: actions/upload-artifact@v2
         with:
           name: SimpleChatter
           path: SimpleChatter.exe
+          
+      - name: upload AnotherFunc
+        uses: actions/upload-artifact@v2
+        with:
+          name: AnotherFunc
+          path: AnotherFunc.exe
           
       - name: Check file existence
         id: check_files
