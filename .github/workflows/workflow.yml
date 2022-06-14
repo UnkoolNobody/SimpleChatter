@@ -11,8 +11,14 @@ jobs:
         
       - name: Build for Windows
         run: |
-          g++ AnotherFunc.cpp -o AnotherFunc.exe
-          g++ SimpleChatter.cpp -o SimpleChatter.exe
+          g++ AnotherFunc.cpp -o ./win/AnotherFunc.exe
+          g++ SimpleChatter.cpp -o ./win/SimpleChatter.exe
+          
+      - name: upload result
+        uses: actions/upload-artifact@v3
+        with:
+          path: win
+          name: Programm
           
       - name: Check file existence
         id: check_files
