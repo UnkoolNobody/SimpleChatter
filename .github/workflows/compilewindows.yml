@@ -1,0 +1,26 @@
+name: "WINDOWCOMPILE.YML"
+
+on: [push, pull_request]
+
+jobs:
+  compile_for_windows:
+    runs-on:  windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Build for Windows
+        run: |
+          g++ SimpleChatter.cpp -o SimpleChatter.exe
+          g++ AnotherFunc.cpp -o AnotherFunc.exe
+      - name: upload SimpleChatter
+        uses: actions/upload-artifact@v2
+        with:
+          name: SimpleChatter
+          path: SimpleChatter.exe
+          
+      - name: upload AnotherFunc
+        uses: actions/upload-artifact@v2
+        with:
+          name: AnotherFunc
+          path: AnotherFunc.exe
