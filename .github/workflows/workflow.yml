@@ -4,36 +4,22 @@ on: [push, pull_request]
 
 jobs:
   file_existence:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-          - os: windows-latest
-          - os: macos-latest
+    runs-on:  windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Build for Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.so
-
+        
       - name: Build for Windows
         if: matrix.os == 'windows-latest'
-        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.dll
-
-      - name: Build for macOS
-        if: matrix.os == 'macos-latest'
-        run: g++ -fno-common -dynamiclib src/stats.c -o dist/sqlite3-stats.dylib
+        run: |
+          g++ AnotherFunc.cpp -o AnotherFunc.exe
+          g++ SimpleChatter.cpp -o SimpleChatter.exe
         
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+      - name: upload result
+        uses: actions/upload-artifact@v3
         with:
-          repo_token: ${{ secrets.API_TOKEN_GITHUB }}
-          file: dist/${{ matrix.artifact_name }}
-          asset_name: ${{ matrix.asset_name }}
-          tag: ${{ github.ref }}
+          path: prog
+          name: CompiledPrograms
 
       - name: Check file existence
         id: check_files
