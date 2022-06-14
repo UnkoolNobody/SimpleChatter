@@ -4,7 +4,13 @@ on: [push, pull_request]
 
 jobs:
   file_existence:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: windows-latest
+          - os: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -33,11 +39,13 @@ jobs:
         with:
           working-directory: './'
           doxyfile-path: './Doxyfile'
+          
       - name: upload result
         uses: actions/upload-artifact@v3
         with:
           path: doc
           name: Doxygen
+          
       - name: Push to IO repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -49,3 +57,23 @@ jobs:
           user-email: 'michaelzh2002@mail.ru'
           commit-message: 'Doxygen-documentation'
           target-branch: main
+
+      - uses: actions/checkout@v2
+
+      - name: Build for Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.so
+
+      - name: Build for Windows
+        if: matrix.os == 'windows-latest'
+        run: g++ -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.dll
+
+      - name: Build for macOS
+        if: matrix.os == 'macos-latest'
+        run: g++ -fno-common -dynamiclib src/stats.c -o dist/sqlite3-stats.dylib
+        
+      - name: upload prog
+        uses: actions/upload-artifact@v3
+        with:
+          path: prog
+          name: Compiled Program
